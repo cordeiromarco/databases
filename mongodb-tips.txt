@@ -1,14 +1,11 @@
 
 mongo "mongodb+srv://sandbox-qdmgo.mongodb.net/test"  --username m001-student
 
-mongo "mongodb+srv://sandbox-qdmgo.mongodb.net/test"  --username m001-student --password m001-mongodb-basics
-
 Create a user with the following credentials:
 
 username: m001-student
 
-password: m001-mongodb-basics
-
+password: 
 -----------------------------------------
 
 mongo cluster admin
@@ -135,3 +132,6 @@ mongo admin --host localhost:27000 --eval '
 lab import dataset:
 
 mongoimport --db applicationData --collection products --file /dataset/products.json --username m103-application-user --password m103-application-pass --host localhost:27000 --authenticationDatabase admin
+
+
+
