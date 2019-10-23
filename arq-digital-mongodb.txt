@@ -16,16 +16,16 @@ Successfully added user:
 
 ----------------------------------------
 
-db.createUser({
+ db.createUser({
     user: "mongoadmin",
-    pwd: “jk35h398yu325823975389”,
+    pwd: "jk35h398yu32582397538",
     roles: [
-	{ role: "userAdminAnyDatabase", db: "admin" }, { role: "readWriteAnyDatabase" }
-	]
+      {role: "root", db: "admin"},
+      {role: "userAdminAnyDatabase", db: "admin"},
+      {role: "readWriteAnyDatabase", db: "admin"}
+    ]
   })
-,
-
-
+'
 ----------------------------------------
 
 mongo admin --host localhost --eval '
