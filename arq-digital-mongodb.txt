@@ -19,7 +19,7 @@ Successfully added user:
 db.createUser(
   {
     user: "mongoadmin",
-    pwd: “jk35h398yu325823975389”, // or cleartext password
+    pwd: “jk35h398yu325823975389”, 
     roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
   }
 )
