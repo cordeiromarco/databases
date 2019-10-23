@@ -53,6 +53,14 @@ mongo admin --host localhost --eval '
 '
 
 -------------------------------------------
+https://docs.mongodb.com/manual/reference/method/db.dropUser/
+
+use admin
+db.dropUser("arqdigital")
+
+-------------------------------------------
+
+
 View a User’s Roles
 
 mongo --port 27017 -u myUserAdmin -p 'abc123' --authenticationDatabase 'admin'
