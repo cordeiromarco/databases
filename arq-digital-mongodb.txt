@@ -1,0 +1,84 @@
+-------------------------------
+Add auth:
+
+sudo vi /etc/mongod.conf
+
+add:
+security:
+  authorization: "enabled"
+
+sudo service mongod restart
+
+------------------------------------
+
+
+Successfully added user: 
+
+----------------------------------------
+
+db.createUser(
+  {
+    user: "mongoadmin",
+    pwd: “jk35h398yu325823975389”, // or cleartext password
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+  }
+)
+
+
+----------------------------------------
+
+mongo admin --host localhost --eval '
+  db.createUser({
+    user: "arqdigital",
+    pwd: "3@8bvy^9",
+    roles: [
+      {role: "root", db: "admin"}
+    ]
+  })
+'
+
+-----------------------------------------
+
+Successfully added user and database: 
+
+mongo admin --host localhost --eval '
+  db.createUser({
+    user: "chatbottubo-user",
+    pwd: "?bssq9dw",
+    roles: [
+      {role: "readWrite", db: "ChatbotTubo"}
+    ]
+  })
+'
+
+-------------------------------------------
+View a User’s Roles
+
+mongo --port 27017 -u myUserAdmin -p 'abc123' --authenticationDatabase 'admin'
+
+Identify the user’s roles.
+Use the usersInfo command or db.getUser() method to display user information.
+
+For example, to view roles for reportsUser created in Examples, issue:
+
+use admin
+db.getUser("chatbottubo-user")
+
+-------------------------------------------
+
+> db.getUser("chatbottubo-user")
+{
+        "_id" : "admin.chatbottubo-user",
+        "user" : "chatbottubo-user",
+        "db" : "admin",
+        "roles" : [
+                {
+                        "role" : "readWrite",
+                        "db" : "ChatbotTubo"
+                }
+        ]
+}
+>
+------------------------------------------
+
+
