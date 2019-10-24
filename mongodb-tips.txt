@@ -1,11 +1,14 @@
 
 mongo "mongodb+srv://sandbox-qdmgo.mongodb.net/test"  --username m001-student
 
+mongo "mongodb+srv://sandbox-qdmgo.mongodb.net/test"  --username m001-student --password m001-mongodb-basics
+
 Create a user with the following credentials:
 
 username: m001-student
 
-password: 
+password: m001-mongodb-basics
+
 -----------------------------------------
 
 mongo cluster admin
@@ -133,5 +136,64 @@ lab import dataset:
 
 mongoimport --db applicationData --collection products --file /dataset/products.json --username m103-application-user --password m103-application-pass --host localhost:27000 --authenticationDatabase admin
 
+Print configuration file:
+
+cat /etc/mongod.conf
+ 
+Launch standalone mongod:
+
+mongod -f /etc/mongod.conf
+ 
+Connect to mongod:
+
+mongo --host 127.0.0.1:27017
+ 
+Create new user with the root role (also, named root):
+
+use admin
+db.createUser({
+  user: "root",
+  pwd: "root123",
+  roles : [ "root" ]
+})
+ 
+Connect to mongod and authenticate as root:
+
+mongo --username root --password root123 --authenticationDatabase admin
+ 
+Run DB stats:
+
+db.stats()
+ 
+Shutdown the server:
+
+use admin
+db.shutdownServer()
+
+Create security officer:
+
+db.createUser(
+  { user: "security_officer",
+    pwd: "h3ll0th3r3",
+    roles: [ { db: "admin", role: "userAdmin" } ]
+  }
+)
+ 
+Create database administrator:
+
+db.createUser(
+  { user: "dba",
+    pwd: "c1lynd3rs",
+    roles: [ { db: "admin", role: "dbAdmin" } ]
+  }
+)
+ 
+Grant role to user:
+
+db.grantRolesToUser( "dba",  [ { db: "playground", role: "dbOwner"  } ] )
+ 
+Show role privileges:
+
+db.runCommand( { rolesInfo: { role: "dbOwner", db: "playground" }, showPrivileges: true} )
 
 
