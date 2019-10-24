@@ -1,0 +1,50 @@
+Deeper Dive on the MongoDB Query Language
+
+How many documents in the 100YWeatherSmall.data collection do NOT 
+contain the key atmosphericPressureChange.
+
+use 100YWeatherSmall
+
+db.data.find({atmosphericPressureChange: {$exists: false}}).count()
+
+Using the $in operator, filter the video.movieDetails collection to 
+determine how many movies list "Ethan Coen" or "Joel Coen" among their writers. 
+
+use video
+
+db.movieDetails.find({"writers": {"$in": ["Ethan Coen", "Joel Coen"]}}).count()
+
+How many documents in the ships.shipwrecks collection match either of the following
+ criteria: watlev equal to "always dry" or depth equal to 0.
+
+use ships
+
+db.shipwrecks.find({$or: [{depth: 0}, {watlev: "always dry"}]}).count()
+
+
+How many documents list: "AG1", "MD1", and "OA1" among the codes in their sections array.
+
+use 100YWeatherSmall
+
+db.data.find({sections: {$all: ["AG1", "MD1", "OA1"]}}).count()
+
+How many documents in this collection contain exactly two elements in the sections array field?
+
+use 100YWeatherSmall
+
+db.data.find({sections: {$size: 2}}).count()
+
+Documents in the results.surveys collection have the following schema.
+
+{_id: ObjectId("5964e8e5f0df64e7bc2d7373"),
+ results: [{product: "abc", score: 10}, {product: "xyz", score: 9}]}
+ 
+The field called results that has an array as its value. This array contains survey results for 
+products and lists the product name and the survey score for each product.
+
+How many documents in the results.surveys collection contain a score of 7 for the product, "abc"?
+
+use results
+
+db.surveys.find({results: {$elemMatch: {product: "abc", score: 7}}}).count()
+
