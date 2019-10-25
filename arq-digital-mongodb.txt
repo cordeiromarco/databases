@@ -52,6 +52,18 @@ mongo admin --host localhost --eval '
   })
 '
 
+use ChatbotTubo
+
+db.createCollection("log", { capped : true, size : 5242880, max : 5000 } )
+
+test connection:
+
+mongo ChatbotTubo --host localhost --username chatbottubo-user --password ?bssq9dw --authenticationDatabase 'admin'
+
+show collections
+
+exit
+
 -------------------------------------------
 https://docs.mongodb.com/manual/reference/method/db.dropUser/
 
