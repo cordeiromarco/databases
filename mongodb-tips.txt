@@ -35,15 +35,14 @@ By default, a mongod that enforces authentication but has no configured users on
 
 Use the following command to connect to the Mongo shell and create the following user. You will need this user in order to validate subsequent labs.
 
-mongo admin --host localhost:27000 --eval '
-  db.createUser({
-    user: "m103-admin",
-    pwd: "m103-pass",
-    roles: [
-      {role: "root", db: "admin"}
-    ]
-  })
-'
+use admin
+db.createUser({
+  user: "m103-admin",
+  pwd: "m103-pass",
+  roles: [
+    {role: "root", db: "admin"}
+  ]
+})
 
 The above command creates a user with the following credentials:
 
@@ -234,4 +233,52 @@ tail products.json
 Use mongoimport to create a MongoDB collection from a JSON or CSV file:
 
 mongoimport --port 30000 products.json
+
+--------------------------------------------------------------------------------
+
+set up cluster
+
+Connecting to node1:
+
+mongo --port 27011
+ 
+Initiating the replica set:
+
+rs.initiate()
+
+create user:
+
+use admin
+db.createUser({
+  user: "m103-admin",
+  pwd: "m103-pass",
+  roles: [
+    {role: "root", db: "admin"}
+  ]
+})
+
+exit and connect to cluster:
+
+mongo --host "m103-repl/192.168.103.100:27001" -u "m103-admin" -p "m103-pass" --authenticationDatabase "admin"
+
+Adding other members to replica set:
+
+rs.add("192.168.103.100:27002")
+rs.add("192.168.103.100:27003")
+
+check members:
+
+rs.status()  
+
+Getting an overview of the replica set topology:
+
+rs.isMaster()
+
+Replication Commands
+
+rs.status()
+rs.isMaster()
+db.serverStatus()['repl']
+rs.printReplicationInfo()
+
 
