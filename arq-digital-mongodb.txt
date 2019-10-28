@@ -102,4 +102,6 @@ db.getUser("chatbottubo-user")
 >
 ------------------------------------------
 
+mongodb://chatbottubo-user:SOh3TbYhx8ypJPxmt1oOfL@10.1.88.149:27017/ChatbotTubo?authSource=admin
 
+-------------------------------------------
